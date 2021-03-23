@@ -1,3 +1,16 @@
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "tamopstfstates"
+    storage_account_name = "tamopstfcailon"
+    container_name       = "tfstatedevops"
+    key                  = "terraformgithubexample.tfstate"
+  }
+}
+
+
+
+
+
 # Configure the Microsoft Azure Provider.
 provider "azurerm" {
   version = "~>2.24"
@@ -8,6 +21,8 @@ provider "azurerm" {
 
   features {}
 }
+
+data "azurerm_client_config" "current" {}
 
 module "rg" {
   source         = "./rg"
